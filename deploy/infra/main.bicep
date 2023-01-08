@@ -15,6 +15,8 @@ var dataFactoryName = '${namePrefix}adf'
 var dataBricksName = '${namePrefix}dbr'
 var synapseName = '${namePrefix}syn'
 
+var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+
 module storageAccount 'modules/storage/storageAccounts.bicep' = {
   name: 'storageAccountModule'
   params: {
@@ -46,5 +48,18 @@ module synapse 'modules/synapse/synapse.bicep' = {
     dfsEndpoint: storageAccount.outputs.dfsEndpoint
     location: location
     synapseName: synapseName
+  }
+}
+
+module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep' = {
+  name: 'storageAccountRbacDataFactoryModule'
+  dependsOn: [
+    storageAccount
+    dataFactory
+  ]
+  params: {
+    principalId: dataFactory.outputs.managedIdentity 
+    storageAccountName: storageAccount.outputs.name
+    role: 'reader'
   }
 }
