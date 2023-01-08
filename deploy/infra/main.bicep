@@ -9,24 +9,42 @@ param storageContainerNames array = [
 
 var uniquePostfix = uniqueString(resourceGroup().id)
 var namePrefix = 'demolake-${environmentName}-'
+
 var storageAccountName = '${take(replace(namePrefix, '-', ''), 24)}${uniquePostfix}'
+var dataFactoryName = '${namePrefix}adf'
+var dataBricksName = '${namePrefix}dbr'
+var synapseName = '${namePrefix}syn'
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: storageAccountName
-  location: location
-  sku: {
-    name: 'Standard_LRS'
+module storageAccount 'modules/storage/storageAccounts.bicep' = {
+  name: 'storageAccountModule'
+  params: {
+    location: location
+    storageAccountName: storageAccountName
+    storageContainerNames: storageContainerNames
   }
-  kind: 'StorageV2'
-  properties: {
-    isHnsEnabled: true
-  }
+}
 
-  resource blobStorage 'blobServices' = {
-    name: 'default'
-    resource containers 'containers' = [for containerName in storageContainerNames: {
-      name: containerName
-    }]
+module dataFactory 'modules/datafactory/dataFactories.bicep' = {
+  name: 'dataFactoryModule'
+  params: {
+    dataFactoryName: dataFactoryName
+    location: location
   }
+}
 
+module dataBricks 'modules/databricks/databricks.bicep' = {
+  name: 'dataBricksModule'
+  params: {
+    dataBricksName: dataBricksName
+    location: location
+  }
+}
+
+module synapse 'modules/synapse/synapse.bicep' = {
+  name: 'synapseModule'
+  params: {
+    dfsEndpoint: storageAccount.outputs.dfsEndpoint
+    location: location
+    synapseName: synapseName
+  }
 }
