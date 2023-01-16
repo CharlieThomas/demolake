@@ -60,6 +60,6 @@ module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep'
   params: {
     principalId: dataFactory.outputs.managedIdentity 
     storageAccountName: storageAccount.outputs.name
-    role: 'reader'
+    role: 'storageBlobDataContributor'
   }
 }
