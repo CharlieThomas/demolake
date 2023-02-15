@@ -14,6 +14,8 @@ var storageAccountName = '${take(replace(namePrefix, '-', ''), 24)}${uniquePostf
 var dataFactoryName = '${namePrefix}adf'
 var dataBricksName = '${namePrefix}dbr'
 var synapseName = '${namePrefix}syn'
+var keyvaultName = '${namePrefix}kv'
+var userManagedIdentityName = '${namePrefix}msi'
 
 var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
 
@@ -61,5 +63,13 @@ module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep'
     principalId: dataFactory.outputs.managedIdentity 
     storageAccountName: storageAccount.outputs.name
     role: 'storageBlobDataContributor'
+  }
+}
+
+module applicationCredential 'modules/application/applicationCredentials.bicep' = {
+  name: 'aplicationCredentialModule'
+  params: {
+    location: location
+    userManagedIdentityName: userManagedIdentityName
   }
 }
