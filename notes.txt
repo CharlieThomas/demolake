@@ -15,19 +15,6 @@ az ad app credential reset
 Needs MSI: ERROR: Please run 'az login' to setup account..
 
 
-resource createapp 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'createappscript'
-  location: location
-  kind: 'AzureCLI'
-  identity: {
-    type: 'UserAssigned'
-    userAssignedIdentities: {
-      '/subscriptions/83f0ac3f-2fbb-4ae2-9466-9a47162519f7/resourcegroups/demolake-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demolake-dev-msi': {}
-    }
-  }
-  properties: {
-    azCliVersion: '2.37.0'
-    retentionInterval: 'P1D'
-    scriptContent: 'az ad app credential reset --id e0814929-6b10-45f1-8c83-216fd296bc2e'
-  }
-}
+az ad signed-in-user show
+
+keys inside keyvault, or depens sections, what's the difference?
