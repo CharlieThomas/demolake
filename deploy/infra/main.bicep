@@ -7,7 +7,6 @@ param storageContainerNames array = [
   'curated'
 ]
 
-var applicationId = 'e0814929-6b10-45f1-8c83-216fd296bc2e'
 
 var uniquePostfix = uniqueString(resourceGroup().id)
 var namePrefix = 'demolake-${environmentName}-'
