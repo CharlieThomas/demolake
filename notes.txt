@@ -18,3 +18,5 @@ Needs MSI: ERROR: Please run 'az login' to setup account..
 az ad signed-in-user show
 
 keys inside keyvault, or depens sections, what's the difference?
+
+az ad sp create-for-rbac --name github-actions-demolake-dev-rg --role contributor --scopes /subscriptions/83f0ac3f-2fbb-4ae2-9466-9a47162519f7/resourceGroups/demolake-dev-rg --sdk-auth
