@@ -18,7 +18,6 @@ resource applicationRegistration 'Microsoft.Resources/deploymentScripts@2020-10-
   properties: {
     azCliVersion: '2.37.0'
     retentionInterval: 'P1D'
-    arguments: '\'${applicationName}\''
     scriptContent: 'result=$(az ad app create --display-name ${applicationName}); echo $result | jq -c {appId} > $AZ_SCRIPTS_OUTPUT_PATH'
   }
 }

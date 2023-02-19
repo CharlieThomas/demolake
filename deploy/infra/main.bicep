@@ -18,6 +18,11 @@ var synapseName = '${namePrefix}syn'
 var keyvaultName = '${namePrefix}kv'
 var userManagedIdentityName = '${namePrefix}msi'
 var applicationName = '${namePrefix}app'
+var sqlServerName = '${namePrefix}svr'
+var sqlDatabaseName = '${namePrefix}db'
+
+var dbaGroupName = 'demolake-dev-group'
+var dbaGroupSid = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796'
 
 var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
 
@@ -112,5 +117,16 @@ module keyVault 'modules/keyvault/keyvaults.bicep' = {
     location: location
     secretName: 'applicationkey'
     secretValue: applicationCredential.outputs.applicationpassword
+  }
+}
+
+module sqlserver 'modules/sqldb/sqldb.bicep' = {
+  name: 'sqlservermodule'
+  params: {
+    dbaGroupName: dbaGroupName
+    dbaGroupSid: dbaGroupSid
+    location: location
+    sqlDatabaseName: sqlDatabaseName
+    sqlServerName: sqlServerName
   }
 }

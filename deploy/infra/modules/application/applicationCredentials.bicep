@@ -18,7 +18,6 @@ resource applicationCredential 'Microsoft.Resources/deploymentScripts@2020-10-01
   properties: {
     azCliVersion: '2.37.0'
     retentionInterval: 'P1D'
-    arguments: '\'${applicationId}\''
     scriptContent: 'result=$(az ad app credential reset --id ${applicationId}); echo $result > $AZ_SCRIPTS_OUTPUT_PATH'
   }
 }
