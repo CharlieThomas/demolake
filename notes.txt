@@ -20,3 +20,13 @@ az ad signed-in-user show
 keys inside keyvault, or depens sections, what's the difference?
 
 az ad sp create-for-rbac --name github-actions-demolake-dev-rg --role contributor --scopes /subscriptions/83f0ac3f-2fbb-4ae2-9466-9a47162519f7/resourceGroups/demolake-dev-rg --sdk-auth
+sdk-auth is deprecated, what to use instead? also, how do environments work in github
+contributor is not enough, needs owner, because contributor cannot set rbac roles. 
+
+
+cleanup:
+(remove app)
+az group delete --name demolake-dev-rg
+az group create --name demolake-dev-rg --location westeurope
+(add owner rights to github action app)
+az role assignment create --assignee e1f12e08-5736-46b1-8da6-dc021d404129 --role owner --resource-group demolake-dev-rg
