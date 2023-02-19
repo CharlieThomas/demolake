@@ -17,7 +17,7 @@ var dataBricksName = '${namePrefix}dbr'
 var synapseName = '${namePrefix}syn'
 var keyvaultName = '${namePrefix}kv'
 var userManagedIdentityName = '${namePrefix}msi'
-var applicationName = '${namePrefix}-app'
+var applicationName = '${namePrefix}app'
 
 var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
 
@@ -68,8 +68,19 @@ module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep'
   }
 }
 
+module userAssignedIdentity 'modules/identity/userManagedIdentities.bicep' = {
+  name: 'userAssignedIdentityModule'
+  params: {
+    location: location 
+    userAssignedIdentityName: userManagedIdentityName
+  }
+}
+
 module applicationRegistration 'modules/application/applicationRegistrations.bicep' = {
   name: 'applicationRegistrationModule'
+  dependsOn: [
+    userAssignedIdentity
+  ]
   params: {
     applicationName: applicationName
     location: location
@@ -80,6 +91,9 @@ module applicationRegistration 'modules/application/applicationRegistrations.bic
 
 module applicationCredential 'modules/application/applicationCredentials.bicep' = {
   name: 'aplicationCredentialModule'
+  dependsOn: [
+    applicationRegistration
+  ]
   params: {
     location: location
     userManagedIdentityName: userManagedIdentityName
@@ -90,6 +104,9 @@ module applicationCredential 'modules/application/applicationCredentials.bicep' 
 
 module keyVault 'modules/keyvault/keyvaults.bicep' = {
   name: 'keyvaultModule'
+  dependsOn: [
+    applicationCredential
+  ]
   params: {
     keyvaultName: keyvaultName
     location: location
