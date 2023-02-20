@@ -32,3 +32,4 @@ az group create --name demolake-dev-rg --location westeurope
 az role assignment create --assignee e1f12e08-5736-46b1-8da6-dc021d404129 --role owner --resource-group demolake-dev-rg
 purge keyvault
 
+
