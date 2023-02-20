@@ -16,15 +16,24 @@ var dataFactoryName = '${namePrefix}adf'
 var dataBricksName = '${namePrefix}dbr'
 var synapseName = '${namePrefix}syn'
 var keyvaultName = '${namePrefix}kv'
-var userManagedIdentityName = '${namePrefix}msi'
+var userManagedIdentityName = 'github-demolake-msi'
 var applicationName = '${namePrefix}app'
 var sqlServerName = '${namePrefix}svr'
 var sqlDatabaseName = '${namePrefix}db'
+var logAnalyticsName = '${namePrefix}la'
 
 var dbaGroupName = 'demolake-dev-group'
 var dbaGroupSid = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796'
 
 var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+
+module logAnalytics 'modules/loganalytics/loganalytics.bicep' = {
+  name: 'logAnalyticsModule'
+  params: {
+    location: location
+    logAnalyticsName: logAnalyticsName
+  }
+}
 
 module storageAccount 'modules/storage/storageAccounts.bicep' = {
   name: 'storageAccountModule'
@@ -73,29 +82,21 @@ module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep'
   }
 }
 
-module userAssignedIdentity 'modules/identity/userManagedIdentities.bicep' = {
-  name: 'userAssignedIdentityModule'
-  params: {
-    location: location 
-    userAssignedIdentityName: userManagedIdentityName
-  }
-}
 
 module applicationRegistration 'modules/application/applicationRegistrations.bicep' = {
   name: 'applicationRegistrationModule'
-  dependsOn: [
-    userAssignedIdentity
-  ]
+  scope: resourceGroup('github-actions-rg')
   params: {
     applicationName: applicationName
     location: location
-    resourceGroupName: resourceGroup().name 
+    resourceGroupName: 'github-actions-rg'
     userManagedIdentityName: userManagedIdentityName
   }
 }
 
 module applicationCredential 'modules/application/applicationCredentials.bicep' = {
   name: 'aplicationCredentialModule'
+  scope: resourceGroup('github-actions-rg')
   dependsOn: [
     applicationRegistration
   ]
@@ -103,7 +104,7 @@ module applicationCredential 'modules/application/applicationCredentials.bicep' 
     location: location
     userManagedIdentityName: userManagedIdentityName
     applicationId: applicationRegistration.outputs.applicationId
-    resourceGroupName: resourceGroup().name
+    resourceGroupName: 'github-actions-rg'
   }
 }
 
@@ -129,4 +130,12 @@ module sqlserver 'modules/sqldb/sqldb.bicep' = {
     sqlDatabaseName: sqlDatabaseName
     sqlServerName: sqlServerName
   }
+}
+
+module adfdiag 'modules/loganalytics/diagnostics_datafactory.bicep' = {
+  name: 'adfdiagmodule'
+}
+
+module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
+  name: 'dbrdiagmodule'
 }

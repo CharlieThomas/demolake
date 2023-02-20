@@ -5,16 +5,14 @@ param location string
 param dbaGroupName string
 param dbaGroupSid string
 
-@secure()
-param pwd string = newGuid()
+
+param pw string = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796' 
 
 
 resource sqlserver 'Microsoft.Sql/servers@2022-05-01-preview' = {
   name: sqlServerName
   location: location
   properties: {
-    administratorLogin: 'doesnotexist'
-    administratorLoginPassword: pwd
     administrators: {
       azureADOnlyAuthentication: true
       principalType: 'Group'

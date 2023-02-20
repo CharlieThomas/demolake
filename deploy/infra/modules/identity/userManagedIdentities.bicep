@@ -1,7 +1,9 @@
 param userAssignedIdentityName string
-param location string
+param identityResourceGroupName string
 
-resource userManagedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2022-01-31-preview' = {
+resource msi 'Microsoft.ManagedIdentity/userAssignedIdentities@2022-01-31-preview' existing = {
   name: userAssignedIdentityName
-  location: location
+  scope: resourceGroup(identityResourceGroupName)
 }
+
+output msdId string = msi.properties.
