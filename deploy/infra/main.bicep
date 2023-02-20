@@ -134,8 +134,14 @@ module sqlserver 'modules/sqldb/sqldb.bicep' = {
 
 module adfdiag 'modules/loganalytics/diagnostics_datafactory.bicep' = {
   name: 'adfdiagmodule'
+  dependsOn: [
+    dataFactory
+  ]
 }
 
 module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
   name: 'dbrdiagmodule'
+  dependsOn: [
+    dataBricks
+  ]
 }
