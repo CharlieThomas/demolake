@@ -11,6 +11,7 @@ jobs:
       uses: actions/checkout@main
     - name: Install Data Factory Tools
       shell: pwsh
-      run: Set-PSRepository PSGallery -InstallationPolicy Trusted
-      run: Install-Module -Name azure.datafactory.tools -Scope CurrentUser
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module -Name azure.datafactory.tools -Scope CurrentUser
 
