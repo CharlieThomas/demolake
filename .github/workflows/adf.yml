@@ -29,7 +29,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true
 
-    - name: Install Poweshell Modules
+    - name: Install Powershell Modules
       shell: pwsh
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
