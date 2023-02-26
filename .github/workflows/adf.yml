@@ -1,7 +1,7 @@
 on: 
-  push:
+  pull-request:
     branches:
-      - 'adf_publish'
+      - adf_deploy'
 
 name: Data Factory
 
