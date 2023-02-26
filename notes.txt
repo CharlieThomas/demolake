@@ -35,3 +35,5 @@ purge keyvault
 
 github branch system, keep it super simple. Include project parts in one repo, talk about bigger teams. 
 Checkov as a possibility for checking code.
+
+[no ci]
