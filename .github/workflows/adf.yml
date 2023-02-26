@@ -1,0 +1,14 @@
+on: [workflow_dispatch]
+name: Demolake Azure Data Factory
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@main
+    - name: Install Data Factory Tools
+      shell: pwsh
+      run: Install-Module -Name azure.datafactory.tools -Scope CurrentUser
