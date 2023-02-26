@@ -33,3 +33,5 @@ az role assignment create --assignee e1f12e08-5736-46b1-8da6-dc021d404129 --role
 purge keyvault
 
 
+github branch system, keep it super simple. Include project parts in one repo, talk about bigger teams. 
+Checkov as a possibility for checking code.
