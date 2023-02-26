@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - adf_deploy
+      - adf_publish
 
 name: Data Factory
 
