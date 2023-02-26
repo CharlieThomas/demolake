@@ -24,10 +24,10 @@ jobs:
     - name: Install Data Factory Tools
       shell: pwsh
       run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module az.accounts
         Connect-AzAccount -Identity
         Set-AzContext -Subscription "MVP Sponsorship"
-        Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module -Name az.datafactory
         Install-Module -Name azure.datafactory.tools
         Import-Module azure.datafactory.tools
