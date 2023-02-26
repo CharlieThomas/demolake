@@ -1,0 +1,10 @@
+{
+	"name": "lake",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://demolakedeviwmt54eoa5ois.dfs.core.windows.net/"
+		}
+	}
+}
