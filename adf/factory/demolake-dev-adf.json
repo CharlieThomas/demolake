@@ -1,0 +1,9 @@
+{
+	"name": "demolake-dev-adf",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1ef3268a-0f32-4593-815e-cb03b3eaa265",
+		"tenantId": "8ca8a39f-e070-4c01-8323-3d86f11af103"
+	}
+}
