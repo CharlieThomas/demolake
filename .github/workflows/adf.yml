@@ -26,6 +26,7 @@ jobs:
       shell: pwsh
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module -Name az.resources
         Install-Module -Name az.datafactory
         Install-Module -Name azure.datafactory.tools
         Import-Module azure.datafactory.tools
