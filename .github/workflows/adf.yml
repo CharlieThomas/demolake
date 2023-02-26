@@ -14,3 +14,4 @@ jobs:
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module -Name azure.datafactory.tools -Scope CurrentUser
+        
