@@ -1,5 +1,5 @@
 on: 
-  - workflow-dispatch
+  - [workflow-dispatch]
   push:
     branches:
       - adf_deploy
