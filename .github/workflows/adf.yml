@@ -1,4 +1,7 @@
-on: [workflow_dispatch]
+on: 
+  push:
+    branches:
+      - adf_publish
 name: Data Factory
 
 jobs:
