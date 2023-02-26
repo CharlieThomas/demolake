@@ -26,11 +26,6 @@ jobs:
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module -Name azure.datafactory.tools
-        Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
-
-    - name: Publish Data Factory
-      shell: pwsh
-      run: |
         Import-Module azure.datafactory.tools
         Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
 
