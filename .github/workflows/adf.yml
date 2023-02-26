@@ -24,6 +24,7 @@ jobs:
     - name: Install Data Factory Tools
       shell: pwsh
       run: |
+        Install-Module az.accounts
         Connect-AzAccount -Identity
         Set-AzContext -Subscription "MVP Sponsorship"
         Set-PSRepository PSGallery -InstallationPolicy Trusted
