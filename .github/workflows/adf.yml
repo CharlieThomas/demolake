@@ -30,7 +30,7 @@ jobs:
         Install-Module -Name az.datafactory
         Install-Module -Name azure.datafactory.tools
 
-    -name: Deploy Data Factory
-     shell: pwsh
-     run: Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
+    - name: Deploy Data Factory
+      shell: pwsh
+      run: Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
    
