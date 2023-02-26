@@ -1,7 +1,7 @@
-on: 
-  pull-request:
+on: [workflow-dispatch]
+  push:
     branches:
-      - adf_deploy'
+      - adf_deploy
 
 name: Data Factory
 
