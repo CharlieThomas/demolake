@@ -1,5 +1,5 @@
 on: [workflow_dispatch]
-name: Demolake Azure Data Factory
+name: Data Factory
 
 jobs:
   build-and-deploy:

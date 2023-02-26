@@ -1,5 +1,5 @@
 on: [workflow_dispatch]
-name: Demolake Infra
+name: Infrastructure as Code
 
 jobs:
   build-and-deploy:
