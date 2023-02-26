@@ -22,13 +22,15 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true
 
-    - name: Install Data Factory Tools
+    - name: Install Poweshell Modules
       shell: pwsh
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module -Name az.resources
         Install-Module -Name az.datafactory
         Install-Module -Name azure.datafactory.tools
-        Import-Module azure.datafactory.tools
-        Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
 
+    -name: Deploy Data Factory
+     shell: pwsh
+     run: Publish-AdfV2FromJson -RootFolder "../demolake/adf" -ResourceGroupName "demolake-dev-rg" -DataFactoryName "demolake-dev-adf" -Location "west europe"
+   
