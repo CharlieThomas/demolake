@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@main
+      with:
+        ref: my-branch
 
     - name: Azure Login
       uses: azure/login@v1
