@@ -35,7 +35,7 @@ jobs:
     - name: Set Databricks Environment
       shell: pwsh
       run: |
-        $subscriptionid = '83f0ac3f-2fbb-4ae2-9466-9a47162519f7'
+        $subscriptionid = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         $resourceGroupName = 'demolake-dev-rg'
         $workspaceName = 'demolake-dev-dbr'
         $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
