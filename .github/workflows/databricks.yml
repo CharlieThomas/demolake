@@ -40,8 +40,5 @@ jobs:
         $workspaceName = 'demolake-dev-dbr'
         $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
 
-        Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId   
-
-    - name: Get clusters
-      shell: pwsh
-      run: get-databrickscluster
+        Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId
+        get-databrickscluster   
