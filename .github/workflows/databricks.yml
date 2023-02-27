@@ -1,0 +1,46 @@
+on: [workflow_dispatch]
+
+name: Databricks
+
+jobs:
+  build-and-deploy:
+    permissions:
+      id-token: write
+      contents: read
+
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@main
+      with:
+        ref: main
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
+
+    - name: Install Powershell Modules
+      shell: pwsh
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module -Name databricksps
+
+    - name: Set Databricks Environment
+      shell: pwsh
+      run: |
+        $subscriptionid = '83f0ac3f-2fbb-4ae2-9466-9a47162519f7'
+        $resourceGroupName = 'demolake-dev-rg'
+        $workspaceName = 'demolake-dev-dbr'
+        $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
+
+        Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId   
+
+    - name: Get clusters
+      shell: pwsh
+      run: get-databrickscluster
