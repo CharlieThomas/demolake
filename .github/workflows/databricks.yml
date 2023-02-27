@@ -33,9 +33,11 @@ jobs:
         Install-Module -Name databricksps
 
     - name: Set Databricks Environment
+      env:
+        SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       shell: pwsh
       run: |
-        $subscriptionid = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        $subscriptionid = $env:SUBSCRIPTION_ID
         $resourceGroupName = 'demolake-dev-rg'
         $workspaceName = 'demolake-dev-dbr'
         $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
