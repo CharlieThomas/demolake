@@ -43,4 +43,4 @@ jobs:
         $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
 
         Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId
-        get-databrickscluster   
+        Add-DatabricksWorkspaceDirectory -Path "admin"
