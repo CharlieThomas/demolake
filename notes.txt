@@ -32,6 +32,18 @@ az group create --name demolake-dev-rg --location westeurope
 az role assignment create --assignee e1f12e08-5736-46b1-8da6-dc021d404129 --role owner --resource-group demolake-dev-rg
 purge keyvault
 
+        ./code/powershell/loadnotebooks.ps1
+
+
+
+flan:
+      az deployment group create \
+        --name $(Build.BuildNumber) \
+        --resource-group datalake-rg \
+        --template-file $(Build.SourcesDirectory)/infra/main.bicep \
+        --parameters location='westeurope'
+
+
 
 github branch system, keep it super simple. Include project parts in one repo, talk about bigger teams. 
 Checkov as a possibility for checking code.
