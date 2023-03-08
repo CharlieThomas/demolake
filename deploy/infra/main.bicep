@@ -7,7 +7,6 @@ param storageContainerNames array = [
   'curated'
 ]
 
-
 var uniquePostfix = uniqueString(resourceGroup().id)
 var namePrefix = 'demolake-${environmentName}-'
 
@@ -145,3 +144,8 @@ module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
     dataBricks
   ]
 }
+
+output appid string = applicationRegistration.outputs.applicationId
+output databricksName string = dataBricksName
+output datafactoryName string = dataFactoryName
+
