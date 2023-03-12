@@ -1,14 +1,14 @@
 on: 
   workflow_dispatch:
     inputs:
-    deploy_target:
-      description: 'deploy target'
-      required: true
-      type: choice
-      options:
-      - dev
-      - tst
-      - prd
+      deploy_target:
+        description: 'deploy target'
+        required: true
+        type: choice
+        options:
+        - dev
+        - tst
+        - prd
 
 name: Infrastructure as Code
 
