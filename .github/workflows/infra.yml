@@ -7,7 +7,7 @@ permissions:
 
 
 jobs:
-  deploy-infra-dev':
+  deploy-infra-dev:
     runs-on: ubuntu-latest
     environment: dev
 
