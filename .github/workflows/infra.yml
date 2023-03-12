@@ -3,12 +3,12 @@ name: Infrastructure as Code
 
 jobs:
     deploy_infra_dev':
-      name: Deploy Infra Dev
-      permissions:
-        id-token: write
-        contents: read
-      runs-on: ubuntu-latest
-      environment: dev
+    name: Deploy Infra Dev
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    environment: dev
 
     steps:
     - name: Checkout Code
