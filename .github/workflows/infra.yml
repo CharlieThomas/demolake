@@ -2,7 +2,8 @@ on: [workflow_dispatch]
 name: Infrastructure as Code
 
 jobs:
-  'deploy infra':
+  - name: Deploy Infra Dev
+    deploy_infra_dev':
     permissions:
       id-token: write
       contents: read
