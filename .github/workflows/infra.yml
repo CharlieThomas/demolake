@@ -5,7 +5,7 @@ inputs:
   deploy-target:
     description: 'deploy target'
     required: true
-    default: 'warning'
+    default: 'dev'
     type: choice
     options:
     - dev
