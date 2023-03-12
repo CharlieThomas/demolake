@@ -24,7 +24,6 @@ var logAnalyticsName = '${namePrefix}la'
 var dbaGroupName = 'demolake-dev-group'
 var dbaGroupSid = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796'
 
-var blobStorageContributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
 
 module logAnalytics 'modules/loganalytics/loganalytics.bicep' = {
   name: 'logAnalyticsModule'
