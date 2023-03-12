@@ -27,10 +27,11 @@ contributor is not enough, needs owner, because contributor cannot set rbac role
 cleanup:
 (remove app)
 az group delete --name demolake-dev-rg
+az keyvault purge --name demolake-dev-kv-?
 az group create --name demolake-dev-rg --location westeurope
 (add owner rights to github action app)
 az role assignment create --assignee e1f12e08-5736-46b1-8da6-dc021d404129 --role owner --resource-group demolake-dev-rg
-purge keyvault
+
 
         ./code/powershell/loadnotebooks.ps1
 
