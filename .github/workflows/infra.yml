@@ -1,17 +1,17 @@
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+    deploy-target:
+      description: 'deploy target'
+      required: true
+      default: 'dev'
+      type: choice
+      options:
+      - dev
+      - tst
+      - prd
+
 name: Infrastructure as Code
-
-inputs:
-  deploy-target:
-    description: 'deploy target'
-    required: true
-    default: 'dev'
-    type: choice
-    options:
-    - dev
-    - tst
-    - prd
-
 
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
