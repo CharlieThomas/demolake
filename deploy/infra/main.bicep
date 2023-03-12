@@ -10,20 +10,21 @@ param storageContainerNames array = [
 var uniquePostfix = uniqueString(resourceGroup().id)
 var namePrefix = 'demolake-${environmentName}-'
 
-var storageAccountName = '${take(replace(namePrefix, '-', ''), 24)}${uniquePostfix}'
-var dataFactoryName = '${namePrefix}adf'
+var storageAccountName = take('${replace(namePrefix, '-', '')}${uniquePostfix}', 24)
+var dataFactoryName = take('${namePrefix}${environmentName}adf-${uniquePostfix}', 24)
 var dataBricksName = '${namePrefix}dbr'
+/*
 var synapseName = '${namePrefix}syn'
-var keyvaultName = '${namePrefix}kv-${uniquePostfix}'
+*/
+var keyvaultName = take('${namePrefix}kv-${uniquePostfix}',24)
 var userManagedIdentityName = 'github-demolake-msi'
 var applicationName = '${namePrefix}app'
-var sqlServerName = '${namePrefix}svr-${uniquePostfix}'
+var sqlServerName = take('${namePrefix}svr-${uniquePostfix}', 24)
 var sqlDatabaseName = '${namePrefix}db'
 var logAnalyticsName = '${namePrefix}la'
 
 var dbaGroupName = 'demolake-dev-group'
 var dbaGroupSid = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796'
-
 
 module logAnalytics 'modules/loganalytics/loganalytics.bicep' = {
   name: 'logAnalyticsModule'
@@ -58,6 +59,7 @@ module dataBricks 'modules/databricks/databricks.bicep' = {
   }
 }
 
+/*
 module synapse 'modules/synapse/synapse.bicep' = {
   name: 'synapseModule'
   params: {
@@ -66,6 +68,7 @@ module synapse 'modules/synapse/synapse.bicep' = {
     synapseName: synapseName
   }
 }
+*/
 
 module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep' = {
   name: 'storageAccountRbacDataFactoryModule'
