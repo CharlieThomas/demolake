@@ -1,10 +1,9 @@
 on: 
   workflow_dispatch:
     inputs:
-    deploy-target:
+    deploy_target:
       description: 'deploy target'
       required: true
-      default: 'dev'
       type: choice
       options:
       - dev
@@ -44,7 +43,8 @@ jobs:
         failOnStdErr: false
 
   deploy-infra-tst:
-    if: ${{ github.event.inputs.deploy-target == 'tst' || github.event.inputs.deploy-target == 'prd' }}
+    needs: deploy-infra-dev
+    if: ${{ github.event.inputs.deploy_target == 'tst' || github.event.inputs.deploy_target == 'prd' }}
     runs-on: ubuntu-latest
     environment: tst
 
@@ -68,7 +68,8 @@ jobs:
         failOnStdErr: false
 
   deploy-infra-prd:
-    if: ${{ github.event.inputs.deploy-target == 'prd' }}
+    needs: [deploy-infra-dev, deploy-infra-tst]
+    if: ${{ github.event.inputs.deploy_target == 'prd' }}
     runs-on: ubuntu-latest
     environment: prd
 
