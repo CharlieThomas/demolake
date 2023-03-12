@@ -2,7 +2,7 @@ on: [workflow_dispatch]
 name: Infrastructure as Code
 
 jobs:
-  deploy_infra:
+  'deploy infra':
     permissions:
       id-token: write
       contents: read
@@ -10,19 +10,17 @@ jobs:
     environment: dev
 
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@main
 
-      # Checkout code
-    - uses: actions/checkout@main
-
-      # Log into Azure
-    - uses: azure/login@v1
+    - name: Azure Login
+      uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Deploy Bicep file
-    - name: deploy
+    - name: Bicep Deploy
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
