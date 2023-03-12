@@ -3,7 +3,7 @@ name: Infrastructure as Code
 
 jobs:
     deploy_infra_dev':
-    name: Deploy Infra Dev
+      name: Deploy Infra Dev
     permissions:
       id-token: write
       contents: read
