@@ -14,10 +14,10 @@ var storageAccountName = '${take(replace(namePrefix, '-', ''), 24)}${uniquePostf
 var dataFactoryName = '${namePrefix}adf'
 var dataBricksName = '${namePrefix}dbr'
 var synapseName = '${namePrefix}syn'
-var keyvaultName = '${namePrefix}kv'
+var keyvaultName = '${namePrefix}kv-${uniquePostfix}'
 var userManagedIdentityName = 'github-demolake-msi'
 var applicationName = '${namePrefix}app'
-var sqlServerName = '${namePrefix}svr'
+var sqlServerName = '${namePrefix}svr-${uniquePostfix}'
 var sqlDatabaseName = '${namePrefix}db'
 var logAnalyticsName = '${namePrefix}la'
 
