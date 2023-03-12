@@ -44,8 +44,8 @@ jobs:
 
 jobs:
   deploy-infra-tst:
-    runs-on: ubuntu-latest
     if: ${{ github.event.inputs.environment == 'tst' || github.event.inputs.environment == 'prd' }}
+    runs-on: ubuntu-latest
     environment: tst
 
     steps:
@@ -69,8 +69,8 @@ jobs:
 
 jobs:
   deploy-infra-prd:
-    runs-on: ubuntu-latest
     if: ${{ github.event.inputs.environment == 'prd' }}
+    runs-on: ubuntu-latest
     environment: prd
 
     steps:
