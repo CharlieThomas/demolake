@@ -1,15 +1,77 @@
 on: [workflow_dispatch]
 name: Infrastructure as Code
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 permissions:
   id-token: write
   contents: read
+
+inputs:
+  environment:
+    description: 'Environment'
+    required: true
+    default: 'warning'
+    type: choice
+    options:
+    - dev
+    - tst
+    - prd
 
 
 jobs:
   deploy-infra-dev:
     runs-on: ubuntu-latest
     environment: dev
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@main
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Bicep Deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ../demolake/deploy/infra/main.bicep
+        failOnStdErr: false
+
+jobs:
+  deploy-infra-tst:
+    runs-on: ubuntu-latest
+      if: ${{ github.event.inputs.environment == 'tst' || github.event.inputs.environment == 'prd' }}
+    environment: tst
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@main
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Bicep Deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ../demolake/deploy/infra/main.bicep
+        failOnStdErr: false
+
+jobs:
+  deploy-infra-prd:
+    runs-on: ubuntu-latest
+      if: ${{ github.event.inputs.environment == 'prd' }}
+    environment: prd
 
     steps:
     - name: Checkout Code
