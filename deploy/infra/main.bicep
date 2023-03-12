@@ -136,6 +136,9 @@ module adfdiag 'modules/loganalytics/diagnostics_datafactory.bicep' = {
   dependsOn: [
     dataFactory
   ]
+  params: {
+    datafactoryName: dataFactoryName
+  }
 }
 
 module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
@@ -143,6 +146,9 @@ module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
   dependsOn: [
     dataBricks
   ]
+  params: {
+    databricksName: dataBricksName
+  }
 }
 
 output appid string = applicationRegistration.outputs.applicationId
