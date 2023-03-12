@@ -2,13 +2,13 @@ on: [workflow_dispatch]
 name: Infrastructure as Code
 
 jobs:
-  - name: Deploy Infra Dev
     deploy_infra_dev':
-    permissions:
-      id-token: write
-      contents: read
-    runs-on: ubuntu-latest
-    environment: dev
+      name: Deploy Infra Dev
+      permissions:
+        id-token: write
+        contents: read
+      runs-on: ubuntu-latest
+      environment: dev
 
     steps:
     - name: Checkout Code
