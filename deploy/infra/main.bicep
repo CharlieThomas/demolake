@@ -18,7 +18,7 @@ var synapseName = '${namePrefix}syn'
 */
 var keyvaultName = take('${namePrefix}kv-${uniquePostfix}',24)
 var userManagedIdentityName = 'github-demolake-msi'
-var applicationName = '${namePrefix}app'
+var applicationName = '${namePrefix}${environmentName}-app'
 var sqlServerName = take('${namePrefix}svr-${uniquePostfix}', 24)
 var sqlDatabaseName = '${namePrefix}db'
 var logAnalyticsName = '${namePrefix}la'
