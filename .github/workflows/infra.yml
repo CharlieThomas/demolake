@@ -12,7 +12,7 @@ on:
 
 name: Infrastructure as Code
 
-run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
 permissions:
   id-token: write
@@ -40,6 +40,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ../demolake/deploy/infra/main.bicep
+        parameters: 'environmentName=dev'
         failOnStdErr: false
 
   deploy-infra-tst:
@@ -65,6 +66,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ../demolake/deploy/infra/main.bicep
+        parameters: 'environmentName=tst'        
         failOnStdErr: false
 
   deploy-infra-prd:
@@ -90,4 +92,5 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ../demolake/deploy/infra/main.bicep
+        parameters: 'environmentName=prd'        
         failOnStdErr: false
