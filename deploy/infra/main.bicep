@@ -140,6 +140,8 @@ module adfdiag 'modules/loganalytics/diagnostics_datafactory.bicep' = {
   ]
   params: {
     datafactoryName: dataFactoryName
+    resourceGroupName: resourceGroup().name
+    logAnalyticsName: logAnalyticsName
   }
 }
 
@@ -150,6 +152,8 @@ module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
   ]
   params: {
     databricksName: dataBricksName
+    resourceGroupName: resourceGroup().name
+    logAnalyticsName: logAnalyticsName
   }
 }
 
