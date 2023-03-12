@@ -11,17 +11,17 @@ var uniquePostfix = uniqueString(resourceGroup().id)
 var namePrefix = 'demolake-${environmentName}-'
 
 var storageAccountName = take('${replace(namePrefix, '-', '')}${uniquePostfix}', 24)
-var dataFactoryName = take('${namePrefix}${environmentName}adf-${uniquePostfix}', 24)
+var dataFactoryName = take('${namePrefix}adf-${uniquePostfix}', 24)
 var dataBricksName = '${namePrefix}dbr'
 /*
 var synapseName = '${namePrefix}syn'
 */
 var keyvaultName = take('${namePrefix}kv-${uniquePostfix}',24)
 var userManagedIdentityName = 'github-demolake-msi'
-var applicationName = '${namePrefix}${environmentName}-app'
+var applicationName = '${namePrefix}app'
 var sqlServerName = take('${namePrefix}svr-${uniquePostfix}', 24)
 var sqlDatabaseName = '${namePrefix}db'
-var logAnalyticsName = '${namePrefix}la'
+var logAnalyticsName = '${namePrefix}log'
 
 var dbaGroupName = 'demolake-dev-group'
 var dbaGroupSid = 'dcad9a44-f9a3-4f07-a76b-2035a5fdc796'
