@@ -21,3 +21,4 @@ resource demolakedevdb 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
   location: 'westeurope'
   name: 'demolake-dev-svr/demolake-dev-db'
 }
+
