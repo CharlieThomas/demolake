@@ -44,6 +44,4 @@ jobs:
 
         Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId
         Add-DatabricksWorkspaceDirectory -Path "/admin"
-      
-      - name: test
-        run: az account get-access-token --query "accessToken" --output tsv
+        az account get-access-token
