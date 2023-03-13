@@ -48,7 +48,7 @@ jobs:
       shell: pwsh
       run: |
         $keyvaultName = ${{ steps.bicep.outputs.keyvaultName }}
-        $keyvaultSecret = $(az keyvault secret show --name  'applicationkey' --vault-name $keyvaultName | ConvertFrom-json | Select-Object -exp value )
+        $keyvaultSecret = $(az keyvault secret show --name  'applicationkey' --vault-name "$($keyvaultName)" | ConvertFrom-json | Select-Object -exp value )
         $subscriptionid = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         $resourceGroupName = 'demolake-dev-rg'
         $workspaceName = 'demolake-dev-dbr'
