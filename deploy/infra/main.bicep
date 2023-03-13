@@ -157,7 +157,7 @@ module dbrdiag 'modules/loganalytics/diagnostics_databricks.bicep' = {
   }
 }
 
-output appid string = applicationRegistration.outputs.applicationId
+
 output databricksName string = dataBricksName
 output datafactoryName string = dataFactoryName
 
