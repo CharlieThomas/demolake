@@ -51,5 +51,5 @@ jobs:
         Add-DatabricksWorkspaceDirectory -Path "/admin"
         $env:DATABRICKS_AAD_TOKEN = $(az account get-access-token --resource 2ff814a6-3304-4ab8-85cb-cd0e6f879c1d | ConvertFrom-json | Select-Object -exp accessToken )
         databricks configure --aad-token --host https://adb-5039276063839249.9.azuredatabricks.net
-        databricks secrets create-scope --scope keyvault_scope --scope-backend-type AZURE_KEYVAULT --resource-id /subscriptions/83f0ac3f-2fbb-4ae2-9466-9a47162519f7/resourceGroups/databricks-otap-demo-rg/providers/Microsoft.KeyVault/vaults/databricks-dev-keyvault --dns-name https://databricks-dev-keyvault.vault.azure.net/
+        databricks secrets create-scope --scope keyvault_scope --scope-backend-type AZURE_KEYVAULT --resource-id /subscriptions/83f0ac3f-2fbb-4ae2-9466-9a47162519f7/resourceGroups/demolake-dev-rg/providers/Microsoft.KeyVault/vaults/demolake-dev-kv-iwmt54eo --dns-name https://demolake-dev-kv-iwmt54eo.vault.azure.net/
         databricks secrets list-scopes
