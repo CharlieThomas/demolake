@@ -35,6 +35,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Bicep Deploy
+      id: bicep
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
@@ -42,6 +43,19 @@ jobs:
         template: ../demolake/deploy/infra/main.bicep
         parameters: 'environmentName=dev'
         failOnStdErr: false
+    
+    - name: Initialize Databricks
+      shell: pwsh
+      run: |
+        $keyvaultName = ${{ steps.bicep.outputs.keyvaultName }}
+        $keyvaultSecret = $(az keyvault secret show --name  'applicationkey' --vault-name $keyvaultName | ConvertFrom-json | Select-Object -exp value )
+        $subscriptionid = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        $resourceGroupName = 'demolake-dev-rg'
+        $workspaceName = 'demolake-dev-dbr'
+        $azureResourceId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Databricks/workspaces/$workspaceName"
+        Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId
+        if (-Not (Get-DatabrickSsecretScope | where-object Name -eq 'default')) {Add-DatabricksSecretScope  -ScopeName 'default'}
+        if (-Not (Get-DatabricksSecret -ScopeName 'default' | where name -eq 'lake')) {Add-DatabricksSecret -ScopeName 'default' -SecretName 'lake' -StringValue $keyvaultSecret}
 
   deploy-infra-tst:
     needs: deploy-infra-dev
