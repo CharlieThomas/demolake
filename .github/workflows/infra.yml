@@ -44,6 +44,13 @@ jobs:
         parameters: 'environmentName=dev'
         failOnStdErr: false
     
+    - name: Install Powershell Modules
+      shell: pwsh
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module -Name az.resources
+        Install-Module -Name databricksps
+
     - name: Initialize Databricks
       shell: pwsh
       run: |
