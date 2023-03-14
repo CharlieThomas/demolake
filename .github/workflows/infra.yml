@@ -63,6 +63,8 @@ jobs:
         Set-DatabricksEnvironment -UsingAzContext -AzureResourceID $azureResourceId
         if (-Not (Get-DatabrickSsecretScope | where-object Name -eq 'default')) {Add-DatabricksSecretScope  -ScopeName 'default'}
         if (-Not (Get-DatabricksSecret -ScopeName 'default' | where name -eq 'lake')) {Add-DatabricksSecret -ScopeName 'default' -SecretName 'lake' -StringValue $keyvaultSecret}
+        Add-DatabricksWorkspaceDirectory -Path "/admin"
+        Mount-DatabricksSto
 
   deploy-infra-tst:
     needs: deploy-infra-dev
