@@ -129,9 +129,10 @@ module storageAccountRbacApplication 'modules/storage/storageAccount-rbac.bicep'
   dependsOn: [
     applicationServicePrincipal
     applicationCredential
+    applicationRegistration
   ]
   params: {
-    principalId: 'demolake-dev-app'
+    principalId: applicationRegistration.outputs.applicationId
     principalType: 'ServicePrincipal'
     role: 'storageBlobDataContributor'
     storageAccountName: storageAccountName
