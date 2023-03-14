@@ -1,5 +1,6 @@
 param storageAccountName string
 param principalId string
+param principalType string
 param role string
 
 var roleId = {
@@ -15,6 +16,7 @@ resource storageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
   name: guid(storageAccount.name, principalId, roleId[role])
   properties: {
+    principalType: principalType
     principalId: principalId
     roleDefinitionId: roleId[role]
   }

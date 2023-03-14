@@ -77,6 +77,7 @@ module storageAccountRbacDataFactory 'modules/storage/storageAccount-rbac.bicep'
     dataFactory
   ]
   params: {
+    principalType: 'ServicePrincipal'
     principalId: dataFactory.outputs.managedIdentity 
     storageAccountName: storageAccount.outputs.name
     role: 'storageBlobDataContributor'
@@ -130,7 +131,8 @@ module storageAccountRbacApplication 'modules/storage/storageAccount-rbac.bicep'
     applicationCredential
   ]
   params: {
-    principalId: applicationRegistration.outputs.applicationId
+    principalId: 'demolake-dev-app'
+    principalType: 'ServicePrincipal'
     role: 'storageBlobDataContributor'
     storageAccountName: storageAccountName
   }
