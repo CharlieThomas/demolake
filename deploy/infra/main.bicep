@@ -111,6 +111,10 @@ module applicationCredential 'modules/application/applicationCredentials.bicep' 
 
 module applicationServicePrincipal 'modules/application/applicationServicePrincipal.bicep' = {
   name: 'applicationServicePrincipalModule'
+  scope: resourceGroup('github-actions-rg')
+  dependsOn: [
+    applicationRegistration
+  ]
   params: {
     applicationId: applicationRegistration.outputs.applicationId
     location: location
@@ -121,6 +125,10 @@ module applicationServicePrincipal 'modules/application/applicationServicePrinci
 
 module storageAccountRbacApplication 'modules/storage/storageAccount-rbac.bicep' = {
   name: 'storageAccountRbacApplicationModule'
+  dependsOn: [
+    applicationServicePrincipal
+    applicationCredential
+  ]
   params: {
     principalId: applicationRegistration.outputs.applicationId
     role: 'storageBlobDataContributor'
