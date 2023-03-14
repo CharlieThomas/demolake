@@ -109,6 +109,15 @@ module applicationCredential 'modules/application/applicationCredentials.bicep' 
   }
 }
 
+module storageAccountRbacApplication 'modules/storage/storageAccount-rbac.bicep' = {
+  name: 'storageAccountRbacApplicationModule'
+  params: {
+    principalId: applicationRegistration.outputs.applicationId
+    role: 'storageBlobDataContributor'
+    storageAccountName: storageAccountName
+  }
+}
+
 module keyVault 'modules/keyvault/keyvaults.bicep' = {
   name: 'keyvaultModule'
   dependsOn: [
