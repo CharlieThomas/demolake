@@ -109,6 +109,16 @@ module applicationCredential 'modules/application/applicationCredentials.bicep' 
   }
 }
 
+module applicationServicePrincipal 'modules/application/applicationServicePrincipal.bicep' = {
+  name: 'applicationServicePrincipalModule'
+  params: {
+    applicationId: applicationRegistration.outputs.applicationId
+    location: location
+    resourceGroupName: 'github-actions-rg' 
+    userManagedIdentityName: userManagedIdentityName
+  }
+}
+
 module storageAccountRbacApplication 'modules/storage/storageAccount-rbac.bicep' = {
   name: 'storageAccountRbacApplicationModule'
   params: {
